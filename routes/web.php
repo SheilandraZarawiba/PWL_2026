@@ -14,11 +14,11 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', function () {
- return 'Hello World';
+    return 'Hello World';
 });
 
 Route::get('/world', function () {
- return 'World';
+    return 'World';
 });
 
 Route::get('/', function () {
@@ -30,23 +30,23 @@ Route::get('/about', function () {
 });
 
 Route::get('/user/{name}', function ($name) {
- return 'Nama saya '.$name;
+    return 'Nama saya ' . $name;
 });
 
-Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId){
- return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
+Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
+    return 'Pos ke-' . $postId . " Komentar ke-: " . $commentId;
 });
 
 Route::get('/articles/{id}', function ($id) {
-    return 'Halaman Artikel dengan ID '.$id;
+    return 'Halaman Artikel dengan ID ' . $id;
 });
 
-Route::get('/user/{name?}', function ($name=null) {
- return 'Nama saya '.$name;
+Route::get('/user/{name?}', function ($name = null) {
+    return 'Nama saya ' . $name;
 });
 
-Route::get('/user/{name?}', function ($name='John') {
- return 'Nama saya '.$name;
+Route::get('/user/{name?}', function ($name = 'John') {
+    return 'Nama saya ' . $name;
 });
 
 // membuat route dengan controller
@@ -63,8 +63,23 @@ Route::get('/articles/{id}', ArticleController::class);
 // membuat route dengan resource controller
 Route::resource('photos', PhotoController::class);
 Route::resource('photos', PhotoController::class)->only([
- 'index', 'show'
+    'index',
+    'show'
 ]);
 Route::resource('photos', PhotoController::class)->except([
- 'create', 'store', 'update', 'destroy'
+    'create',
+    'store',
+    'update',
+    'destroy'
 ]);
+
+// membuat route dengan view
+// Route::get('/greeting', function () {
+//     return view('hello', ['name' => 'Sheilandra Zarawiba']);
+// });
+// Route::get('/greeting', function () {
+//     return view('blog.hello', ['name' => 'Sheilandra Zarawiba']);
+// });
+
+// membuat route dengan controller yang mengembalikan view
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
